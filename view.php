@@ -18,6 +18,8 @@
     </div>
 <?php endif;?>
 
+
+
 <table class="table table-striped table-wide">
     <thead>
         <tr>
