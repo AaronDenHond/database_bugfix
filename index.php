@@ -33,8 +33,8 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
         $handle = $pdo->prepare('INSERT INTO user (firstname, lastname, year) VALUES (:firstname, :lastname, :year)');
         $message = 'Your record has been added';
     } else {
-        //@todo why does this not work?
-        $handle = $pdo->prepare('UPDATE user VALUES (firstname = :firstname, lastname = :lastname, year = :year) WHERE id = :id');
+        //@todo why does this not work? CHECK, wrong syntax : values -> set plus removing brackets
+        $handle = $pdo->prepare('UPDATE user set firstname = :firstname, lastname = :lastname, year = :year WHERE id = :id');
         $handle->bindValue(':id', $_POST['id']);
         $message = 'Your record has been updated';
     }
@@ -51,6 +51,7 @@ if (!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
         $userId = $_POST['id'];
     } else {
         //why did I leave this if empty? There must be no important reason for this. Move on.
+        $userId = $pdo->lastInsertId();
     }
 
     //@todo Why does this loop not work? If only I could see the bigger picture.
